@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- include -->
+<script src="vendor/aframe.min.js"></script>
+<!-- jsartookit -->
+<script src="three.js/vendor/jsartoolkit5/build/artoolkit.min.js"></script>
+<script src="three.js/vendor/jsartoolkit5/js/artoolkit.api.js"></script>
+<!-- include threex.artoolkit -->
+<script src="three.js/threex-artoolkitcontext.js"></script>
+<script src="three.js/threex-artoolkitsource.js"></script>
+<script src="three.js/threex-armarkercontrols.js"></script>
+<!-- include aframe-artoolkit -->
+<script src="aframe-ar.js"></script>
+<!-- include gif shader -->
+<script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script> 
+<script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script> 
+<!-- to load .ply model -->
+<script src="https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"></script>
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: fixed; top: 10px; width:inherit; text-align: center; z-index: 1;'>
+	<a>Example of AR</a>
+</div>
+	<a-scene embedded artoolkit='sourceType: webcam;'>
+		<!-- handle unknown marker -->
+		<a-marker type='unknown'>
+			<a-box depth="1" height="1" width="1" position='0 0.0 0' material='opacity: 0.5; side:double; color:blue;'></a-box>
+		</a-marker>
+		
+		<a-assets>
+			<a-asset-item id="optimerBoldFont" src="https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json"></a-asset-item>
+		</a-assets>
+		
+		<!-- handle hiro marker -->
+		<a-marker preset='hiro'>
+			<a-plane id="hiro" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Titanic-Cobh-Harbour-1912.JPG/330px-Titanic-Cobh-Harbour-1912.JPG" position="0 0 0" rotation="-90 0 0" width="1.5" height="1.5" color="#7BC8A4"></a-plane>
+		</a-marker>
+
+		<!-- handle kanji marker -->
+		<a-marker preset='kanji'>
+			<a-entity geometry="primitive:plane;" material="shader:gif;src:url(https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif);" position="0 0 0" rotation="-90 0 0" scale='2 2 2'></a-entity>
+		</a-marker>
+		
+		<!-- handle custom marker -->
+		<a-marker type='pattern' url='data/marker.pat'>
+			<a-entity geometry="primitive:circle;" material="shader:gif;src:url(https://media.giphy.com/media/8bxaRzNnA8yaI/giphy.gif);color:blue;opacity:.8" position="0 0 0" rotation="-90 0 0"></a-entity>
+			<a-entity id="audioBit" geometry="primitive: plane" material="color:blue;opacity:.0" rotation="-90 0 0" position="0 0 0" sound="src: url(data/talking.mp3); autoplay: true"></a-entity>
+		</a-marker>
+        
+		<!-- handle custom marker -->
+		<a-marker type='pattern' url='data/marker2.pat'>
+			<a-entity text-geometry="value: Hello!!!" position='0 0 0' rotation="-90 0 0" scale='1 1 1'></a-entity>
+		</a-marker>
+		
+		<!-- add a simple camera -->
+		<a-entity camera></a-entity>
+	</a-scene>
+</body>
+</html>
